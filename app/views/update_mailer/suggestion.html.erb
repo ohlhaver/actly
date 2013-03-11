@@ -1,0 +1,10 @@
+<%= @author.name %> added a suggestion to <%= link_to @event.title, event_url(@event) %>:
+<br><br>
+<%= @suggestion.address %> at <%= @suggestion.time.to_formatted_s(:short) %>
+<br><br>
+<% unless @notes.empty? %>
+"<%= @notes %>"
+<br><br>
+<% end %>
+Rsvp, comment or unsubscribe <%= link_to "here", event_url(@event) %>.
+

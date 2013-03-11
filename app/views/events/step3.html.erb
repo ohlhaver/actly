@@ -1,0 +1,18 @@
+<h2> Step 3/3: Invite people </h2>
+<%= form_tag :controller => "invitations", :action => "invite_contacts" do %>
+  <%= label_tag "Select stage.ly contacts" %><br>
+  <%= select_tag "invitees", options_from_collection_for_select(current_user.contacts, 'id', 'label'), :multiple => true %>
+  <%= hidden_field_tag 'event_id', @event.id  %>
+  <%= hidden_field_tag 'user_id', current_user.id  %>
+  <%= submit_tag "Invite" %>
+<% end %>
+<br>
+- or -
+<br><br>
+<%= form_tag :controller => "invitations", :action => "add_invitees" do %>
+  <%= label_tag "Enter comma separated list of emails" %><br>
+  <%= text_field_tag "invitees" %>
+  <%= hidden_field_tag 'event_id', @event.id  %>
+  <%= hidden_field_tag 'user_id', current_user.id  %>
+  <%= submit_tag "Invite" %>
+<% end %>

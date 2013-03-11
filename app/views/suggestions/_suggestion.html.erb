@@ -1,0 +1,30 @@
+<%= suggestion.address %> | <%= suggestion.time.to_formatted_s(:short) %> | Confirmed: <%= render suggestion.confirmed_users %> | Favored: <%= render suggestion.favoring_users %> | Maybe: <%= render suggestion.maybe_users %> | Declined: <%= render suggestion.declining_users %>
+
+<% unless get_status(suggestion) == 1 %>
+<%= form_tag :controller => "rsvps", :action => "confirm" do %>
+  <%= hidden_field_tag 'suggestion_id', suggestion.id  %>
+  <%= submit_tag "confirm" %>
+<% end %>
+<%end%>
+<% unless get_status(suggestion) == 2 %>
+<%= form_tag :controller => "rsvps", :action => "favor" do %>
+  <%= hidden_field_tag 'suggestion_id', suggestion.id  %>
+  <%= submit_tag "favor" %>
+<% end %>
+<% end %>
+<% unless get_status(suggestion) == 3 %>
+<%= form_tag :controller => "rsvps", :action => "maybe" do %>
+  <%= hidden_field_tag 'suggestion_id', suggestion.id  %>
+  <%= submit_tag "maybe" %>
+<% end %>
+<% end %>
+<% unless get_status(suggestion) == 4 %>
+<%= form_tag :controller => "rsvps", :action => "decline" do %>
+  <%= hidden_field_tag 'suggestion_id', suggestion.id  %>
+  <%= submit_tag "decline" %>
+<% end %>
+<% end %>
+
+<br>
+<%= suggestion.notes %>
+<br><br>

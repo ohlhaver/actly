@@ -1,0 +1,23 @@
+<h1>Create suggestion</h1>
+
+<%= form_for @suggestion do |f| %>
+  <% if @suggestion.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% @suggestion.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %><br />
+    <%= f.text_field :notes %>
+  </div>
+  <div class="suggestions"><%= f.submit "Save" %></div>
+<% end %>

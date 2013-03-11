@@ -1,0 +1,67 @@
+<h1> <%= @event.title %> </h1>
+Last call: <%= @event.lastcall.to_formatted_s(:short) %><br><br>
+<% if @invitation && @invitation.blocked == true %>
+<%= form_tag :controller => "invitations", :action => "follow" do %>
+  <%= hidden_field_tag 'invitation_id', @invitation.id %>
+  <%= submit_tag "follow" %>
+<% end %>
+
+<% elsif @invitation && @invitation.blocked == false %>
+<%= form_tag :controller => "invitations", :action => "unfollow" do %>
+  <%= hidden_field_tag 'invitation_id', @invitation.id%>
+  <%= submit_tag "unfollow" %>
+<% end %>
+<%end%>
+
+<%= render @event.suggestions %>
+
+<h2> Add a suggestion </h2>
+<%= form_for @suggestion do |f| %>
+  <% if @suggestion.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% @suggestion.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </div>
+   <div class="field">
+    <%= f.label :time %><br />
+    <%= f.datetime_select :time, :minute_step => 15 %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %><br />
+    <%= f.text_field :notes %>
+  </div>
+
+  <%= f.hidden_field :event_id, :value => @event.id  %>
+  <div class="suggestions"><%= f.submit "Save" %></div>
+<% end %>
+<br>
+<h2>Invitees</h2>
+<%= render @event.invitations %>
+<br>
+<h2> Add invitees </h2>
+<%= form_tag :controller => "invitations", :action => "invite_contacts" do %>
+  <%= label_tag "Select stage.ly contacts" %><br>
+  <%= select_tag "invitees", options_from_collection_for_select(current_user.contacts, 'id', 'label'), :multiple => true %>
+  <%= hidden_field_tag 'event_id', @event.id  %>
+  <%= hidden_field_tag 'user_id', current_user.id  %>
+  <%= submit_tag "Invite" %>
+<% end %>
+<br>
+- or -
+<br><br>
+<%= form_tag :controller => "invitations", :action => "add_invitees" do %>
+  <%= label_tag "Enter comma separated list of emails" %><br>
+  <%= text_field_tag "invitees" %>
+  <%= hidden_field_tag 'event_id', @event.id  %>
+  <%= hidden_field_tag 'user_id', current_user.id  %>
+  <%= submit_tag "Invite" %>
+<% end %>

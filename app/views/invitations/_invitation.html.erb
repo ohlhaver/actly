@@ -1,0 +1,5 @@
+<br><% if invitation.invitee %>
+<%= invitation.invitee.name %> (<%= invitation.email %>)
+<%else%>
+<%= invitation.email %>
+<%end%>

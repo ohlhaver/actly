@@ -1,0 +1,7 @@
+class StaticPagesController < ApplicationController
+  def home
+  	if current_user
+		@events = (current_user.events + current_user.email_invitation_events).uniq.find_all{|i| i.lastcall >= 2.hours.ago}.sort_by{|e| e[:lastcall]}
+  	end
+  end
+end
