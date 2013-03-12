@@ -5,7 +5,7 @@ Actly::Application.configure do
   config.cache_classes = true
 
   # Full error reports are disabled and caching is turned on
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local       = true
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
@@ -68,10 +68,10 @@ Actly::Application.configure do
   ActionMailer::Base.smtp_settings = {
   :user_name => "app13236433@heroku.com",
   :password => "rockybeach",
-  :domain => "stage.ly",
+  :domain => "@stage.ly",
   :address => "smtp.sendgrid.net",
   :port => 587,
-  :authentication => :plain,
+  authentication: "plain",
   :enable_starttls_auto => true
 }
 
