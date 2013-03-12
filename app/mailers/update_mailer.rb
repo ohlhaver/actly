@@ -1,5 +1,5 @@
 class UpdateMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "\"stage.ly\" <update@stage.ly>"
   
 
   # Subject can be set in your I18n file at config/locales/en.yml

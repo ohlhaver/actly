@@ -1,5 +1,5 @@
 class InvitationMailer < ActionMailer::Base
-  default from: "update@stage.ly"
+  default from: "\"stage.ly\" <update@stage.ly>"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:

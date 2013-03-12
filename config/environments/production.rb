@@ -66,12 +66,12 @@ Actly::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-  :user_name => "app13236433@heroku.com",
+  :user_name => "update@stage.ly",
   :password => "rockybeach",
   :domain => "@stage.ly",
   :address => "smtp.sendgrid.net",
   :port => 587,
-  authentication: "plain",
+  :authentication => :plain,
   :enable_starttls_auto => true
 }
 

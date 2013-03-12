@@ -18,15 +18,17 @@ Actly::Application.configure do
 
   # Change mail delvery to either :smtp, :sendmail, :file, :test
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-  address: "smtp.gmail.com",
-  port: 587,
-  domain: "@stage.ly",
-  authentication: "plain",
-  enable_starttls_auto: true,
-  user_name: "stage.ly@gmail.com",
-  password: "rockybeach"
-  }
+ 
+
+  ActionMailer::Base.smtp_settings = {
+  :user_name => "update@stage.ly",
+  :password => "rockybeach",
+  :domain => "@stage.ly",
+  :address => "smtp.sendgrid.net",
+  :port => 587,
+  :authentication => :plain,
+  :enable_starttls_auto => true
+}
 
   config.action_mailer.default_url_options = { :host => "localhost:3000" }
 
