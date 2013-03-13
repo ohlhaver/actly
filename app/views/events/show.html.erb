@@ -1,5 +1,5 @@
 <h1> <%= @event.title %> </h1>
-<% if @event.lastcall %>Last call: <%= @event.lastcall.to_formatted_s(:short) %><br><br><%end%>
+<% if @event.decision %>Last call: <%= @event.decision.to_formatted_s(:short) %><br><br><%end%>
 <% if @invitation && @invitation.blocked == true %>
 <%= form_tag :controller => "invitations", :action => "follow" do %>
   <%= hidden_field_tag 'invitation_id', @invitation.id %>

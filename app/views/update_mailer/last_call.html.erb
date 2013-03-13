@@ -1,8 +1,8 @@
 Last call for <%= link_to @event.title, event_url(@event) %>:
 <br><br>
-Please update your RSVP status for <%= link_to @event.title, event_url(@event) %> by <%= @event.lastcall.to_formatted_s(:short) %>.
+Please update your RSVP status for <%= link_to @event.title, event_url(@event) %> by <%= @event.decision.to_formatted_s(:short) %>.
 <br><br>
 <%= link_to "Update here.", event_url(@event) %>
 <br><br>
-After <%= @event.lastcall.to_formatted_s(:short) %> no more changes are possible.
+After <%= @event.decision.to_formatted_s(:short) %> no more changes are possible.
 
