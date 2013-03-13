@@ -1,0 +1,5 @@
+The final consensus on time and place for <%= @event.title %> is:
+<br><br>
+<%= @suggestion.address %> at <%= @suggestion.time.to_formatted_s(:short) %>
+<br><br>
+View details or comment <%= link_to "here", event_url(@event) %>.

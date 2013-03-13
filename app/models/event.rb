@@ -3,12 +3,13 @@ class Event < ActiveRecord::Base
   belongs_to :user
   has_many :suggestions
   has_many :invitations
+  has_many :comments
   has_many :followers, through: :invitations, source: :invitee, :conditions => ['invitations.blocked =?',false]
   validates :title, presence: true, length: { maximum: 50 }
-  after_create :set_last_call
+  after_create :set_earliest
 
-  def set_last_call
-  	self.lastcall=1.year.from_now
+  def set_earliest
+  	self.earliest=1.year.from_now
   	self.save
   end
 end

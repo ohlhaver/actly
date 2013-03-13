@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130311143422) do
+ActiveRecord::Schema.define(:version => 20130313150015) do
 
   create_table "actions", :force => true do |t|
     t.string   "title"
@@ -28,6 +28,14 @@ ActiveRecord::Schema.define(:version => 20130311143422) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "comments", :force => true do |t|
+    t.text     "text"
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "contacts", :force => true do |t|
     t.integer  "inviter_id"
     t.integer  "invitee_id"
@@ -37,13 +45,33 @@ ActiveRecord::Schema.define(:version => 20130311143422) do
     t.string   "label"
   end
 
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
   create_table "events", :force => true do |t|
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "user_id"
     t.datetime "lastcall"
+    t.integer  "lastcall_job_id"
+    t.datetime "earliest"
+    t.integer  "decision_job_id"
+    t.datetime "decision"
   end
 
   create_table "followings", :force => true do |t|
@@ -81,6 +109,7 @@ ActiveRecord::Schema.define(:version => 20130311143422) do
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
     t.integer  "event_id"
+    t.integer  "score"
   end
 
   create_table "users", :force => true do |t|

@@ -12,9 +12,9 @@ def create
   		redirect_to :controller => "events", :action => "step3", :id => @event.id
   	else
     redirect_to @event, notice: "Suggestion saved"
-	end
+	 end
   else
-    render @event
+    redirect_to :back
   end
 end
 

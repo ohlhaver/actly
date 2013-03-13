@@ -24,10 +24,16 @@ class UpdateMailer < ActionMailer::Base
   #
   #   en.update_mailer.comment.subject
   #
-  def comment
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+  def comment(comment)
+    @comment = comment
+    @event = comment.event
+    @user = comment.user
+    @text = comment.text
+    @subject = @user.name + " commented on " + @event.title
+    followers =  (@event.followers + Array.wrap(@event.user)).uniq
+    followers -= Array.wrap(@user)
+    receipients =  followers.collect(&:email).join(",")
+    mail :to => "event_followers@stage.ly", :bcc => receipients, :subject => @subject
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -60,6 +66,27 @@ class UpdateMailer < ActionMailer::Base
     else
       ""
     end
-    
   end
+
+  def last_call(event)
+    @event=event
+    @subject = "Last call for" + @event.title
+    followers =  (@event.followers + Array.wrap(@event.user)).uniq
+    receipients =  followers.collect(&:email).join(",")
+    mail :to => "event_followers@stage.ly", :bcc => receipients, :subject => @subject
+
+  end
+
+
+  def decision(event)
+    @event=event
+    @suggestion = @event.suggestions.sort_by{|e| -e[:score]}.first
+    @subject = "Final decision for " + @event.title
+    followers =  (@event.followers + Array.wrap(@event.user)).uniq
+    receipients =  followers.collect(&:email).join(",")
+    mail :to => "event_followers@stage.ly", :bcc => receipients, :subject => @subject
+  end
+
+
+
 end

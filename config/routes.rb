@@ -35,6 +35,7 @@ Actly::Application.routes.draw do
     member do
       get 'step2'
       get 'step3'
+      post 'add_comment'
     end
   end
 

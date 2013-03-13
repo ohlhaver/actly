@@ -1,0 +1,5 @@
+<%= @user.name %> commented on <%= link_to @event.title, event_url(@event) %>:
+<br><br>
+"<%= @text %>"
+ <br><br>
+Respond, rsvp or unsubscribe <%= link_to "here", event_url(@event) %>.

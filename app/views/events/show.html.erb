@@ -1,5 +1,5 @@
 <h1> <%= @event.title %> </h1>
-Last call: <%= @event.lastcall.to_formatted_s(:short) %><br><br>
+<% if @event.lastcall %>Last call: <%= @event.lastcall.to_formatted_s(:short) %><br><br><%end%>
 <% if @invitation && @invitation.blocked == true %>
 <%= form_tag :controller => "invitations", :action => "follow" do %>
   <%= hidden_field_tag 'invitation_id', @invitation.id %>
@@ -13,7 +13,7 @@ Last call: <%= @event.lastcall.to_formatted_s(:short) %><br><br>
 <% end %>
 <%end%>
 
-<%= render @event.suggestions %>
+<%= render @ranked_suggestions %>
 
 <h2> Add a suggestion </h2>
 <%= form_for @suggestion do |f| %>
@@ -43,6 +43,31 @@ Last call: <%= @event.lastcall.to_formatted_s(:short) %><br><br>
   <%= f.hidden_field :event_id, :value => @event.id  %>
   <div class="suggestions"><%= f.submit "Save" %></div>
 <% end %>
+
+<br><br>
+                 <%= form_tag(:controller => "events", :action => "add_comment", :id => @event) do %>
+                        <div id ="comment_field"><%= text_field_tag :comment, nil, :placeholder => 'Write a comment...'%> </div>
+                  <% end %>
+            
+          <!--%end%-->
+          <% if @comments %>
+          
+                  <% @comments.reverse.each do |comment|%>
+                  <div class = "comment">
+                    
+                    <div id ="comment_text">
+
+                      <span class = "user"><%= comment.user.name %></span>:
+                      <span class = "content"> <%= comment.text %> </span>
+                      <span class="timestamp"> <%= time_ago_in_words(comment.created_at) %> ago </span>
+                      
+                    </div>
+                    </div>
+                  <%end%>
+          <%end%>
+
+
+
 <br>
 <h2>Invitees</h2>
 <%= render @event.invitations %>

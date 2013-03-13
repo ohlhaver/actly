@@ -22,6 +22,7 @@ class RsvpsController < ApplicationController
 		@rsvp = Rsvp.find_or_create_by_user_id_and_suggestion_id(current_user.id, suggestion_id)
 		@rsvp.status = status
 		@rsvp.save
+		@rsvp.suggestion.update_score
 		redirect_to :back
 	end
 

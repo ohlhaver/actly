@@ -3,8 +3,11 @@ class Rsvp < ActiveRecord::Base
   belongs_to :user
   belongs_to :suggestion
   after_save :email_notification
+  #after_save :update_score
 
   def email_notification
   	UpdateMailer.rsvp(self).deliver
   end
+
+   
 end

@@ -1,4 +1,5 @@
-<%= suggestion.address %> | <%= suggestion.time.to_formatted_s(:short) %> | Confirmed: <%= render suggestion.confirmed_users %> | Favored: <%= render suggestion.favoring_users %> | Maybe: <%= render suggestion.maybe_users %> | Declined: <%= render suggestion.declining_users %>
+<%= suggestion.address %> | <%= suggestion.time.to_formatted_s(:short) %> | Confirmed: <%= render suggestion.confirmed_users %> | Favored: <%= render suggestion.favoring_users %> | Maybe: <%= render suggestion.maybe_users %> | Declined: <%= render suggestion.declining_users %>  | Score: <%= suggestion.score %>
+
 
 <% unless get_status(suggestion) == 1 %>
 <%= form_tag :controller => "rsvps", :action => "confirm" do %>
