@@ -23,6 +23,7 @@ class RsvpsController < ApplicationController
 		@rsvp.status = status
 		@rsvp.save
 		@rsvp.suggestion.update_score
+		UpdateMailer.delay.rsvp(@rsvp)
 		redirect_to :back
 	end
 
