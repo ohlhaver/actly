@@ -70,7 +70,7 @@ class UpdateMailer < ActionMailer::Base
 
   def last_call(event)
     @event=event
-    @subject = "Last call for" + @event.title
+    @subject = "Last call for " + @event.title
     followers =  (@event.followers + Array.wrap(@event.user)).uniq
     receipients =  followers.collect(&:email).join(",")
     mail :to => "event_followers@stage.ly", :bcc => receipients, :subject => @subject

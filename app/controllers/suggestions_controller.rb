@@ -1,6 +1,7 @@
 class SuggestionsController < ApplicationController
 def new
   @suggestion = Suggestion.new
+  @event = Event.find(params[:id])
 end
 
 def create

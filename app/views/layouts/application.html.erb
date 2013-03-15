@@ -7,17 +7,51 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<%= link_to "stage.ly", root_path %> - 
-  <%= link_to "stage an action", new_event_path %>
-	<% if current_user %>
-  Logged in as <%= current_user.email %>.
-  <%= link_to "Log Out", logout_path %>
-<% else %>
-  <%= link_to "Sign Up", signup_path %> or
-  <%= link_to "Log In", login_path %>
-<% end %>
 
-<%= yield %>
+  <header>
+    <div class="container-fluid">
+      <div class="row-fluid">
+ 
+           
 
+            <div class ="span2">
+              
+
+               <h2><%= link_to "stage.ly", root_path %></h2>
+
+            </div>
+            <div class ="span6">
+        
+            <div class = "header_button">
+                  <%= link_to "stage new action", new_event_path, 
+                                class: "btn btn-medium btn-primary" %>
+                  </div>
+            </div>
+            <div class ="span4">
+          
+              <div class = "header_login">  
+            <% if current_user %>
+
+                  
+                   
+            <%= current_user.email %> | <%= link_to "Log Out", logout_path %>
+            <% else %>
+            <%= link_to "Sign Up", signup_path %> or
+            <%= link_to "Log In", login_path %>
+            <% end %>
+                  
+               
+                </div>
+            </div>
+          </div>
+        </div>         
+                
+  </header>
+        <div class="container-fluid">
+     <div class="row-fluid"> 
+
+            <%= yield %>
+      </div>
+    </div>
 </body>
 </html>

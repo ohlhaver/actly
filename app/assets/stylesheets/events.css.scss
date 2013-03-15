@@ -1,3 +1,221 @@
 // Place all the styles related to the events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+.container {
+    
+  width: 100%;
+
+}
+
+body {
+		font-size: 14px;	
+		font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+		a {
+			color: #3b5998;
+		}
+
+}
+
+header {
+	margin-bottom: 20px;
+}
+
+.pagination {
+			font-size: 14px;	
+		font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+		a {
+			color: #3b5998;
+		}
+
+}
+
+footer {
+	font-size: 12px;
+	margin-top: 40px;
+	margin-bottom: 20px;
+
+
+
+}
+
+li {
+
+      	@media (max-width: 480px) { 
+		list-style: none;
+    padding: 0px 0 10px;
+    border-bottom: 2px solid darkgray;
+}
+@media (min-width: 481px) { 
+				list-style: none;
+    padding: 20px 0 10px;
+    border-bottom: 1px solid lightgray;
+}
+
+  }
+
+  .search_box {
+  	float: right;
+
+  	@media (max-width: 480px) { 
+	margin-top: -10px;
+	margin-bottom: -43px;
+}
+@media (min-width: 481px) { 
+			margin-top: 19px;
+	margin-bottom: -35px;
+}
+
+}
+
+.fb-like {
+	margin-top: 22px;
+	margin-bottom: 17px;
+}
+
+.logo {
+	
+	img {
+		max-width: 32px;
+	}
+
+@media (max-width: 480px) { 
+		font-size: 23px;
+
+		margin-top: 8px;
+		margin-bottom: 0px;
+}
+@media (min-width: 481px) { 
+		font-size: 23px;
+
+		margin-top: 12px;
+		margin-bottom: 60px;
+}
+
+}
+
+.slogan {
+		font-weight: bold;
+
+	  	@media (max-width: 480px) { 
+			font-size: 19px;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		line-height:28px;
+				a {
+			color: $black;
+		}
+}
+@media (min-width: 481px) { 
+					font-size: 19px;
+		margin-top: 15px;
+		line-height:28px;
+				a {
+			color: $black;
+		}
+}
+
+}
+
+#event_listing {
+	
+	font-size: 14px;		
+
+}
+
+.short_event_listing {
+	
+			
+
+}
+
+.very_short_event_listing {
+	
+  
+
+}
+
+
+
+.event_details {
+	
+
+padding: 10px;
+}
+
+
+.category_menu {
+	
+margin-left: 5%;
+line-height:28px;
+
+
+}
+
+.mobile_category_menu {
+	
+margin-top: 0px;
+margin-bottom: 30px;
+font-size: 19px;
+line-height:30px;
+
+}
+
+
+.event_bar {
+
+}
+
+.same_categories_events {
+	margin-top: 20px;
+	
+}
+
+.event_details_item {
+	  	@media (max-width: 480px) { 
+	margin-bottom: 0px;
+}
+@media (min-width: 481px) { 
+			margin-bottom: 20px;
+}
+	
+
+}
+
+.sub_categories {
+	margin-top: -16px;
+	margin-bottom: -16px;
+}
+
+.error_message {
+	font-size: 10px;
+	float: right;
+}
+
+.header_button {
+	margin-top: 18px;
+}
+
+.header_login {
+	margin-top: 24px;
+}
+
+.datetime {
+	font-size: 10px;
+}
+#suggestion_time_2i {
+	width: 100px;
+}
+
+#suggestion_time_3i {
+	width: 50px;
+}
+
+#suggestion_time_4i {
+	width: 50px;
+}
+#suggestion_time_5i {
+	width: 50px;
+}

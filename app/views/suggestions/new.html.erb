@@ -1,6 +1,5 @@
-<h1>Create suggestion</h1>
-
-<%= form_for @suggestion do |f| %>
+<h3>Suggest an alternative time and place </h3>
+<%= simple_form_for @suggestion do |f| %>
   <% if @suggestion.errors.any? %>
     <div class="error_messages">
       <h2>Form is invalid</h2>
@@ -11,13 +10,18 @@
       </ul>
     </div>
   <% end %>
-    <div class="field">
-    <%= f.label :address %><br />
+  <div class="field">
+    <%= f.label "Location or address *" %>
     <%= f.text_field :address %>
   </div>
+   <div class="field">
+    <%= f.label "Time *" %>
+    <%= f.datetime_select :time, :minute_step => 15, discard_year: true %>
+  </div>
   <div class="field">
-    <%= f.label :notes %><br />
+    <%= f.label "Notes/Url" %>
     <%= f.text_field :notes %>
   </div>
-  <div class="suggestions"><%= f.submit "Save" %></div>
+  <%= f.hidden_field :event_id, :value => @event.id  %>
+  <div class="suggestions"><%= f.submit "Save", class: "btn btn-small btn-default" %></div>
 <% end %>

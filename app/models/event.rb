@@ -8,6 +8,9 @@ class Event < ActiveRecord::Base
   validates :title, presence: true, length: { maximum: 50 }
   after_create :set_earliest
 
+
+
+
   def set_earliest
   	self.earliest=1.year.from_now
   	self.save

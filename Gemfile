@@ -46,4 +46,9 @@ gem "daemons"
 
 # To use debugger
 # gem 'debugger'
+gem 'bootstrap-sass', '~> 2.3.0.1'
+
+gem 'simple_form'
+
+gem 'attribute-defaults'
 

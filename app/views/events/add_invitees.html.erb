@@ -1,4 +1,4 @@
-<h3> Step 3/3: Invite people </h3>
+<h2> Add invitees </h2>
 <%= form_tag :controller => "invitations", :action => "invite_contacts" do %>
   <%= label_tag "Select stage.ly contacts" %><br>
   <%= select_tag "invitees", options_from_collection_for_select(current_user.contacts, 'id', 'label'), :multiple => true %>

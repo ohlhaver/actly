@@ -22,6 +22,12 @@ Actly::Application.routes.draw do
     end
   end
 
+  resources :suggestions do
+    member do
+      post 'new'
+    end
+  end
+
   resources :rsvps do
     member do
       post 'favor'
@@ -35,6 +41,7 @@ Actly::Application.routes.draw do
     member do
       get 'step2'
       get 'step3'
+      post 'add_invitees'
       post 'add_comment'
     end
   end

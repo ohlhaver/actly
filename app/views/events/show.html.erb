@@ -1,52 +1,69 @@
-<h1> <%= @event.title %> </h1>
-<% if @event.decision %>Last call: <%= @event.decision.to_formatted_s(:short) %><br><br><%end%>
+
+<h3> <%= @event.title %> </h3>
+
 <% if @invitation && @invitation.blocked == true %>
 <%= form_tag :controller => "invitations", :action => "follow" do %>
   <%= hidden_field_tag 'invitation_id', @invitation.id %>
-  <%= submit_tag "follow" %>
+  <%= submit_tag "follow", class: "btn btn-small btn-default" %>
 <% end %>
 
 <% elsif @invitation && @invitation.blocked == false %>
 <%= form_tag :controller => "invitations", :action => "unfollow" do %>
   <%= hidden_field_tag 'invitation_id', @invitation.id%>
-  <%= submit_tag "unfollow" %>
+  <%= submit_tag "unfollow", class: "btn btn-small btn-default" %>
 <% end %>
 <%end%>
 
-<%= render @ranked_suggestions %>
+<div class ="hidden-phone">
+<div class="row-fluid">
+  <div class="span2">
+    Suggestion
+  </div>
+  <div class="span3">
+    Your status
+  </div>
+<div class ="span6 offset1">
+  <div class="row-fluid">
+  <div class="span3">
+    Confirmed
+  </div>
+  <div class="span3">
+    Favored
+  </div>
+  <div class="span3">
+    Maybe
+  </div>
+  <div class="span3">
+    Declined
+  </div>
+</div>
+</div>
+</div>
+</div>
 
-<h2> Add a suggestion </h2>
-<%= form_for @suggestion do |f| %>
-  <% if @suggestion.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% @suggestion.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_field :address %>
-  </div>
-   <div class="field">
-    <%= f.label :time %><br />
-    <%= f.datetime_select :time, :minute_step => 15 %>
-  </div>
-  <div class="field">
-    <%= f.label :notes %><br />
-    <%= f.text_field :notes %>
-  </div>
 
-  <%= f.hidden_field :event_id, :value => @event.id  %>
-  <div class="suggestions"><%= f.submit "Save" %></div>
+    <table class="table table-striped">
+    <tbody>
+      <div class="row-fluid">
+    <%= render @ranked_suggestions %>
+      </div>
+    </tbody>
+</table>
+<div class="row-fluid">
+<div class = "span6">
+<%= form_tag :controller => "suggestions", :action => "new" do %>
+          <%= submit_tag "Suggest an alternative time & place", class: "btn btn-medium btn-primary" %>
 <% end %>
 
-<br><br>
-                 <%= form_tag(:controller => "events", :action => "add_comment", :id => @event) do %>
-                        <div id ="comment_field"><%= text_field_tag :comment, nil, :placeholder => 'Write a comment...'%> </div>
+
+
+
+
+                  <%= form_tag(:controller => "events", :action => "add_comment", :id => @event) do %>
+                  <div class="input-append">
+                    <%= text_field_tag :comment, nil, :placeholder => 'Write a comment...'%>
+                   <%= submit_tag "submit", class: "btn btn-medium btn-default" %>
+                  </div>
                   <% end %>
             
           <!--%end%-->
@@ -57,36 +74,25 @@
                     
                     <div id ="comment_text">
 
-                      <span class = "user"><%= comment.user.name %></span>:
-                      <span class = "content"> <%= comment.text %> </span>
+                      <span class = "user"><b><%= comment.user.name %></b></span>:
+                      <span class = "content"> "<%= comment.text %>"" </span><br>
                       <span class="timestamp"> <%= time_ago_in_words(comment.created_at) %> ago </span>
+                      <br><br>
                       
                     </div>
                     </div>
                   <%end%>
           <%end%>
+</div>
+<div class = "span6">
+<h4>Invitees:</h4>
 
-
-
-<br>
-<h2>Invitees</h2>
 <%= render @event.invitations %>
-<br>
-<h2> Add invitees </h2>
-<%= form_tag :controller => "invitations", :action => "invite_contacts" do %>
-  <%= label_tag "Select stage.ly contacts" %><br>
-  <%= select_tag "invitees", options_from_collection_for_select(current_user.contacts, 'id', 'label'), :multiple => true %>
-  <%= hidden_field_tag 'event_id', @event.id  %>
-  <%= hidden_field_tag 'user_id', current_user.id  %>
-  <%= submit_tag "Invite" %>
-<% end %>
-<br>
-- or -
 <br><br>
-<%= form_tag :controller => "invitations", :action => "add_invitees" do %>
-  <%= label_tag "Enter comma separated list of emails" %><br>
-  <%= text_field_tag "invitees" %>
-  <%= hidden_field_tag 'event_id', @event.id  %>
-  <%= hidden_field_tag 'user_id', current_user.id  %>
-  <%= submit_tag "Invite" %>
+
+<%= form_tag :controller => "events", :action => "add_invitees" do %>
+          <%= submit_tag "Add invitees", class: "btn btn-medium btn-default" %>
 <% end %>
+<br><br>
+</div>
+</div>

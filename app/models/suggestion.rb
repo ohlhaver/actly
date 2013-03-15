@@ -11,12 +11,25 @@ class Suggestion < ActiveRecord::Base
   validate :time_in_future
   after_create :email_notification
   after_create :update_earliest
+  after_create :cut_url
   after_initialize :init
+
+  attr_default :time do
+    1.hour.from_now.localtime
+  end
 
   def time_in_future
     unless time.future?
       errors.add(:time, "Selected time needs to be in the future")
     end
+  end
+
+  def cut_url
+    url=self.notes
+    url = url.gsub("https://","")
+    url = url.gsub("http://","")
+    self.notes = url
+    self.save
   end
 
   def init

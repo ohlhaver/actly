@@ -1,31 +1,80 @@
-<%= suggestion.address %> | <%= suggestion.time.to_formatted_s(:short) %> | Confirmed: <%= render suggestion.confirmed_users %> | Favored: <%= render suggestion.favoring_users %> | Maybe: <%= render suggestion.maybe_users %> | Declined: <%= render suggestion.declining_users %>  | Score: <%= suggestion.score %>
+
+<tr>
+	<td>
+	<div class="span2">
+		<%= suggestion.address %> <br> <%= suggestion.time.to_formatted_s(:short) %> <br> <%= link_to truncate(suggestion.notes, :length => 20, :omission =>"...", :separator => ' '), "http://#{suggestion.notes}" %>
+	</div>
+		<div class="span3">
+			 <div class="row-fluid">
+				<div class="span4">
+					<% if get_status(suggestion) == nil %>
+							<%= form_tag :controller => "rsvps", :action => "confirm" do %>
+							  <%= hidden_field_tag 'suggestion_id', suggestion.id  %>
+							  <%= submit_tag "confirm" %>
+							<% end %>
+					<%else%>
+					<b><%= show_status(suggestion) %></b>
+					<%end%>
+				</div>
+				<div class="span3">
+					<% if get_status(suggestion) == nil or get_status(suggestion) == 1 %>
+						<%= form_tag :controller => "rsvps", :action => "favor" do %>
+							  <%= hidden_field_tag 'suggestion_id', suggestion.id  %>
+							  <%= submit_tag "favor" %>
+							<% end %>
+					<% else %>
+							<%= form_tag :controller => "rsvps", :action => "confirm" do %>
+							  <%= hidden_field_tag 'suggestion_id', suggestion.id  %>
+							  <%= submit_tag "confirm" %>
+							<% end %>
+					<%end%>
+				</div>
+				<div class="span3">
+					<% if  get_status(suggestion) == 3 or get_status(suggestion) == 4 %>
+							<%= form_tag :controller => "rsvps", :action => "favor" do %>
+							  <%= hidden_field_tag 'suggestion_id', suggestion.id  %>
+							  <%= submit_tag "favor" %>
+							<% end %>
+					<%else%>
+							<%= form_tag :controller => "rsvps", :action => "maybe" do %>
+							  <%= hidden_field_tag 'suggestion_id', suggestion.id  %>
+							  <%= submit_tag "maybe" %>
+							<% end %>
+					<%end%>
+				</div>
+				<div class="span2">
+					<% if get_status(suggestion) == 4 %>
+					<%= form_tag :controller => "rsvps", :action => "maybe" do %>
+							  <%= hidden_field_tag 'suggestion_id', suggestion.id  %>
+							  <%= submit_tag "maybe" %>
+							<% end %>
+					<%else%>
+							<%= form_tag :controller => "rsvps", :action => "decline" do %>
+							  <%= hidden_field_tag 'suggestion_id', suggestion.id  %>
+							  <%= submit_tag "decline" %>
+							<% end %>
+					<%end%>
+				</div>
+	 	</div>
+	</div>
+	<div class="span6 offset1">
+			 <div class="row-fluid">
+	<div class="span3">
+		<%= render suggestion.confirmed_users %>
+	</div>
+	<div class="span3">
+		<%= render suggestion.favoring_users %> 
+	</div>
+
+	<div class="span3">
+		<%= render suggestion.maybe_users %> 
+	</div>
+	<div class="span3">
+		<%= render suggestion.declining_users %> 
+	</div>
+</div>
+</div>
 
 
-<% unless get_status(suggestion) == 1 %>
-<%= form_tag :controller => "rsvps", :action => "confirm" do %>
-  <%= hidden_field_tag 'suggestion_id', suggestion.id  %>
-  <%= submit_tag "confirm" %>
-<% end %>
-<%end%>
-<% unless get_status(suggestion) == 2 %>
-<%= form_tag :controller => "rsvps", :action => "favor" do %>
-  <%= hidden_field_tag 'suggestion_id', suggestion.id  %>
-  <%= submit_tag "favor" %>
-<% end %>
-<% end %>
-<% unless get_status(suggestion) == 3 %>
-<%= form_tag :controller => "rsvps", :action => "maybe" do %>
-  <%= hidden_field_tag 'suggestion_id', suggestion.id  %>
-  <%= submit_tag "maybe" %>
-<% end %>
-<% end %>
-<% unless get_status(suggestion) == 4 %>
-<%= form_tag :controller => "rsvps", :action => "decline" do %>
-  <%= hidden_field_tag 'suggestion_id', suggestion.id  %>
-  <%= submit_tag "decline" %>
-<% end %>
-<% end %>
-
-<br>
-<%= suggestion.notes %>
-<br><br>
+</td>
+</tr>

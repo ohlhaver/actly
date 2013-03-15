@@ -42,5 +42,9 @@ def add_comment
       redirect_to :back
 end
 
+def add_invitees
+  @event = Event.find(params[:id])
+end
+
 end
 
