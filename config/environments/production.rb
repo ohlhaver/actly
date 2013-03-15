@@ -75,5 +75,5 @@ Actly::Application.configure do
   :enable_starttls_auto => true
 }
 
-  config.action_mailer.default_url_options = { :host => "stage.ly" }
+  config.action_mailer.default_url_options = { :host => "www.stage.ly" }
 end
