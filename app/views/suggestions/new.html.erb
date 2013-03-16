@@ -19,7 +19,7 @@
     <%= f.datetime_select :time, :minute_step => 15, discard_year: true %>
   </div>
   <div class="field">
-    <%= f.label "Notes/Url" %>
+    <%= f.label "Url" %>
     <%= f.text_field :notes %>
   </div>
   <%= f.hidden_field :event_id, :value => @event.id  %>

@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :events
   has_many :contacts, foreign_key: "inviter_id"
   has_many :invitations, foreign_key: "invitee_id"
+  before_save { |user| user.email = email.downcase }
   after_save :update_invitations
   after_save :update_contacts
   before_create { generate_token(:auth_token) }
