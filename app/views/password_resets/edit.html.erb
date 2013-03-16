@@ -10,6 +10,10 @@
     </div>
   <% end %>
   <div class="field">
+    <%= f.label "Real Name (so that your friends can recognize you)" %>
+    <%= f.password_field :name %>
+  </div>
+  <div class="field">
     <%= f.label :password %>
     <%= f.password_field :password %>
   </div>
@@ -17,5 +21,6 @@
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %>
   </div>
-  <div class="actions"><%= f.submit "Update Password" %></div>
+  <div class="actions"><%= f.submit "Update Password", 
+                                class: "btn btn-medium btn-default" %></div>
 <% end %>

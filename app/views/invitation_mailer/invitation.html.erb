@@ -1,3 +1,3 @@
-<%= @inviter.name %> invited you to <%= link_to @event.title, event_url(@event) %>
+<%= @inviter.name %> invited you to <%= link_to @event.title, event_url(@event, :inv => @invitation.auth_token) %>
 <br><br>
-Rsvp or comment <%= link_to "here", event_url(@event) %>.
+Rsvp or comment <%= link_to "here", event_url(@event, :inv => @invitation.auth_token) %>.

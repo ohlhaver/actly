@@ -10,7 +10,12 @@ class ApplicationController < ActionController::Base
 
 	def authorize
 		store_location
+		if params[:inv]
+			inv=params[:inv]
+			redirect_to "/auth/#{inv}" if current_user.nil?
+		else
 		redirect_to login_url, alert: "Not authorized" if current_user.nil?
+		end
 	end
 
 	def redirect_back_or(default)

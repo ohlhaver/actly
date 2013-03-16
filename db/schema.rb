@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130313150015) do
+ActiveRecord::Schema.define(:version => 20130316183207) do
 
   create_table "actions", :force => true do |t|
     t.string   "title"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20130313150015) do
     t.string   "email"
     t.string   "label"
     t.boolean  "blocked"
+    t.string   "auth_token"
   end
 
   create_table "rsvps", :force => true do |t|

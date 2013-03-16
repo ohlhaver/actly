@@ -13,7 +13,7 @@ class InvitationMailer < ActionMailer::Base
   end
 
   def invitation(invitation)
-    
+    @invitation = invitation
     @inviter = invitation.inviter
     @subject = invitation.inviter.name + ' invited you to ' + invitation.event.title
     @event = invitation.event

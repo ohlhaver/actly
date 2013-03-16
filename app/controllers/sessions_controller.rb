@@ -17,6 +17,14 @@ class SessionsController < ApplicationController
 	  end
 	end
 
+	def create_from_email
+	    user = User.from_email(params[:inv])
+	    
+	    cookies[:auth_token] = user.auth_token 
+		
+	    redirect_back_or(root_url)
+  	end
+
 	def destroy
 	  cookies.delete(:auth_token)
 	  redirect_to root_url, :notice => "Logged out!"

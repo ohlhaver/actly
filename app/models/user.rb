@@ -65,5 +65,20 @@ class User < ActiveRecord::Base
   	end
   end
 
+def self.from_email(auth_token)
+
+      invitation = Invitation.find_by_auth_token(auth_token)
+      if invitation
+        user = User.find_or_create_by_email(invitation.email)
+       
+        user.name = invitation.email
+        user.password_digest = "1234"
+        user.password = "1234"
+        user.password_confirmation = "1234"
+        user.save!
+      end
+      return user
+end
+
 
 end

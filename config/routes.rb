@@ -28,6 +28,8 @@ Actly::Application.routes.draw do
     end
   end
 
+  match 'auth/:inv', to: 'sessions#create_from_email'
+
   resources :rsvps do
     member do
       post 'favor'
