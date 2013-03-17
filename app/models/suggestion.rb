@@ -43,8 +43,7 @@ class Suggestion < ActiveRecord::Base
     @invitations.each do |i|
   	 UpdateMailer.delay.suggestion(self, i.email, i)
     end
-    UpdateMailer.delay.suggestion(self, event.user.email) unless event.user == user
-
+    UpdateMailer.delay.suggestion(self, event.user.email, nil) unless event.user == user
   end
 
   def update_earliest
@@ -77,7 +76,7 @@ class Suggestion < ActiveRecord::Base
     @invitations.each do |i|
      UpdateMailer.delay.last_call(event, i.email, i)
     end
-    UpdateMailer.delay.last_call(event, event.user.email)
+    UpdateMailer.delay.last_call(event, event.user.email, nil)
   end
 
   def destroy_old_email(event)
@@ -100,7 +99,7 @@ class Suggestion < ActiveRecord::Base
     @invitations.each do |i|
      UpdateMailer.delay.decision(event, i.email, i)
     end
-    UpdateMailer.delay.decision(event, event.user.email)
+    UpdateMailer.delay.decision(event, event.user.email, nil)
   end
 
   def destroy_old_decision_email(event)

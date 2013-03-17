@@ -31,7 +31,7 @@ class RsvpsController < ApplicationController
     	@invitations.each do |i|
 			UpdateMailer.delay.rsvp(@rsvp, i.email, i)
 		end
-		UpdateMailer.delay.rsvp(@rsvp, @rsvp.suggestion.event.user.email) unless @rsvp.suggestion.event.user == @rsvp.user
+		UpdateMailer.delay.rsvp(@rsvp, @rsvp.suggestion.event.user.email, nil) unless @rsvp.suggestion.event.user == @rsvp.user
 		redirect_to :back
 	end
 

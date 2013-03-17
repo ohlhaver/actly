@@ -13,7 +13,7 @@ class Comment < ActiveRecord::Base
     	@invitations.each do |i|
 			UpdateMailer.delay.comment(self, i.email, i)
 		end
-		UpdateMailer.delay.comment(self, event.user.email) unless event.user == user
+		UpdateMailer.delay.comment(self, event.user.email, nil) unless event.user == user
   end
 end
 
