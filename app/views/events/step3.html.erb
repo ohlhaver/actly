@@ -4,15 +4,19 @@
   <%= select_tag "invitees", options_from_collection_for_select(current_user.contacts, 'id', 'label'), :multiple => true %>
   <%= hidden_field_tag 'event_id', @event.id  %>
   <%= hidden_field_tag 'user_id', current_user.id  %>
-  <%= submit_tag "Invite" %>
+  <%= hidden_field_tag 'new_event', true  %>
+  <%= submit_tag "Invite", class: "btn btn-medium btn-default" %>
 <% end %>
 <br>
 - or -
 <br><br>
 <%= form_tag :controller => "invitations", :action => "add_invitees" do %>
   <%= label_tag "Enter comma separated list of emails" %><br>
-  <%= text_field_tag "invitees" %>
+  <div class="input-append">
+                    <%= text_field_tag :invitees, nil, :placeholder => 'Enter email addresses'%>
+                   <%= submit_tag "invite", class: "btn btn-medium btn-default" %>
+  </div>
   <%= hidden_field_tag 'event_id', @event.id  %>
   <%= hidden_field_tag 'user_id', current_user.id  %>
-  <%= submit_tag "Invite" %>
+  <%= hidden_field_tag 'new_event', true  %>
 <% end %>

@@ -37,7 +37,14 @@ class Suggestion < ActiveRecord::Base
   end
 
   def email_notification
-  	UpdateMailer.delay.suggestion(self)
+    @invitations = event.invitations.where(:blocked => false)
+    @author_invitation = Invitation.find_by_email_and_event_id(user.email, event.id )
+    @invitations -= Array.wrap(@author_invitation)
+    @invitations.each do |i|
+  	 UpdateMailer.delay.suggestion(self, i.email, i)
+    end
+    UpdateMailer.delay.suggestion(self, event.user.email) unless event.user == user
+
   end
 
   def update_earliest
@@ -60,9 +67,17 @@ class Suggestion < ActiveRecord::Base
 
   def generate_lastcall_email(event)
     destroy_old_email(event)
-    job = UpdateMailer.delay(:run_at => event.lastcall).last_call(event)
+    job = self.delay(:run_at => event.lastcall).sendout_lastcall_email
     event.lastcall_job_id = job.id
     event.save
+  end
+
+  def sendout_lastcall_email
+    @invitations = event.invitations.where(:blocked => false)
+    @invitations.each do |i|
+     UpdateMailer.delay.last_call(event, i.email, i)
+    end
+    UpdateMailer.delay.last_call(event, event.user.email)
   end
 
   def destroy_old_email(event)
@@ -75,9 +90,17 @@ class Suggestion < ActiveRecord::Base
 
   def generate_decision_email(event)
     destroy_old_decision_email(event)
-    job = UpdateMailer.delay(:run_at => event.decision).decision(event)
+    job = self.delay(:run_at => event.decision).sendout_decision_email
     event.decision_job_id = job.id
     event.save
+  end
+
+  def sendout_decision_email
+    @invitations = event.invitations.where(:blocked => false)
+    @invitations.each do |i|
+     UpdateMailer.delay.decision(event, i.email, i)
+    end
+    UpdateMailer.delay.decision(event, event.user.email)
   end
 
   def destroy_old_decision_email(event)

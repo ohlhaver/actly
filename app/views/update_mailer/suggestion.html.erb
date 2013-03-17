@@ -1,4 +1,4 @@
-<%= @author.name %> added a suggestion to <%= link_to @event.title, event_url(@event) %>:
+<%= @author.name %> added a suggestion to <%= link_to @event.title, event_url(@event, :inv => @auth_token) %>:
 <br><br>
 <%= @suggestion.address %> at <%= @suggestion.time.to_formatted_s(:short) %>
 <br><br>
@@ -6,5 +6,5 @@
 "<%= @notes %>"
 <br><br>
 <% end %>
-Rsvp, comment or unsubscribe <%= link_to "here", event_url(@event) %>.
+Rsvp, comment or unsubscribe <%= link_to "here", event_url(@event, :inv => @auth_token) %>.
 

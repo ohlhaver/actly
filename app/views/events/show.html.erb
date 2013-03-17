@@ -52,7 +52,7 @@
 <div class="row-fluid">
 <div class = "span6">
 <%= form_tag :controller => "suggestions", :action => "new" do %>
-          <%= submit_tag "Suggest an alternative time & place", class: "btn btn-medium btn-primary" %>
+          <%= submit_tag "suggest an alternative time & place", class: "btn btn-medium btn-primary" %>
 <% end %>
 
 
@@ -75,7 +75,7 @@
                     <div id ="comment_text">
 
                       <span class = "user"><b><%= comment.user.name %></b></span>:
-                      <span class = "content"> "<%= comment.text %>"" </span><br>
+                      <span class = "content"> "<%= comment.text %>" </span><br>
                       <span class="timestamp"> <%= time_ago_in_words(comment.created_at) %> ago </span>
                       <br><br>
                       
@@ -91,7 +91,7 @@
 <br><br>
 
 <%= form_tag :controller => "events", :action => "add_invitees" do %>
-          <%= submit_tag "Add invitees", class: "btn btn-medium btn-default" %>
+          <%= submit_tag "add invitees", class: "btn btn-medium btn-default" %>
 <% end %>
 <br><br>
 </div>

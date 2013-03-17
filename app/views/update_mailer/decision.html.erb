@@ -1,5 +1,10 @@
+<%if @no_decision == true %>
+<b>No decision:</b> <br><br>No suggestion received a positive collective vote.
+<%else%>
 The final collective decision on time and place for <%= @event.title %> is:
 <br><br>
 <%= @suggestion.address %> at <%= @suggestion.time.to_formatted_s(:short) %>
+<%end%>
 <br><br>
-View details or comment <%= link_to "here", event_url(@event) %>.
+
+View details or comment <%= link_to "here", event_url(@event, :inv => @auth_token) %>.

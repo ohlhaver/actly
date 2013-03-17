@@ -16,6 +16,7 @@ class InvitationsController < ApplicationController
 				Contact.find_or_create_by_inviter_id_and_email(user_id, i)
 			end
 		end
+		@event.suggestions.last.email_notification if params[:new_event] == "true" 
 		redirect_to @event
 	end
 
@@ -37,6 +38,7 @@ class InvitationsController < ApplicationController
 			end
 			
 		end
+		@event.suggestions.last.email_notification if params[:new_event] == "true" 
 		redirect_to @event
 	end
 

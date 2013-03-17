@@ -23,9 +23,18 @@ class RsvpsController < ApplicationController
 		@rsvp.status = status
 		@rsvp.save
 		@rsvp.suggestion.update_score
-		UpdateMailer.delay.rsvp(@rsvp)
+
+		@invitations = @rsvp.suggestion.event.invitations.where(:blocked => false)
+		@author_invitation = Invitation.find_by_email_and_event_id(@rsvp.user.email, @rsvp.suggestion.event.id )
+
+		@invitations -= Array.wrap(@author_invitation)
+    	@invitations.each do |i|
+			UpdateMailer.delay.rsvp(@rsvp, i.email, i)
+		end
+		UpdateMailer.delay.rsvp(@rsvp, @rsvp.suggestion.event.user.email) unless @rsvp.suggestion.event.user == @rsvp.user
 		redirect_to :back
 	end
+
 
 
 

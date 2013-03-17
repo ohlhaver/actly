@@ -1,8 +1,8 @@
-Last call for <%= link_to @event.title, event_url(@event) %>:
+Last call for <%= link_to @event.title, event_url(@event, :inv => @auth_token) %>:
 <br><br>
-Please update your RSVP status for <%= link_to @event.title, event_url(@event) %> by <%= @event.decision.to_formatted_s(:short) %>.
+Please update your RSVP status for <%= link_to @event.title, event_url(@event, :inv => @auth_token) %> by <%= @event.decision.to_formatted_s(:short) %>.
 <br><br>
-<%= link_to "Update here.", event_url(@event) %>
+<%= link_to "Update here.", event_url(@event, :inv => @auth_token) %>
 <br><br>
 At <%= @event.decision.to_formatted_s(:short) %> the final collective decsion will be pusblished.
 

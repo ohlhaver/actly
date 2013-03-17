@@ -1,5 +1,5 @@
 <%= @user.name %> <b>"<%= @status %>"</b><br>
 <%= @suggestion.address + " @ " +  @suggestion.time.to_formatted_s(:short) %> <br> 
-for <%= link_to @event.title, event_url(@event) %>.
+for <%= link_to @event.title, event_url(@event, :inv => @auth_token) %>.
 <br><br>
-Rsvp, comment or unsubscribe <%= link_to "here", event_url(@event) %>.
+Rsvp, comment or unsubscribe <%= link_to "here", event_url(@event, :inv => @auth_token) %>.

@@ -4,9 +4,9 @@ class ApplicationController < ActionController::Base
   private
 
 	def current_user
-	  @current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
+	  	@current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
 	end
-	helper_method :current_user
+		helper_method :current_user
 
 	def authorize
 		store_location
@@ -19,17 +19,17 @@ class ApplicationController < ActionController::Base
 	end
 
 	def redirect_back_or(default)
-   	 redirect_to(session[:return_to] || default)
-   	 session.delete(:return_to)
+   		redirect_to(session[:return_to] || default)
+   	 	session.delete(:return_to)
   	end
 
 	def store_location
-	  session[:return_to] = request.url
+	  	session[:return_to] = request.url
 	end
 
 	def invited_user
-      @event = Event.find(params[:id])
-      redirect_to root_path, alert: "Not authorized" unless Invitation.find_by_email_and_event_id(current_user.email, @event.id) or current_user == @event.user
+      	@event = Event.find(params[:id])
+      	redirect_to root_path, alert: "Not authorized" unless Invitation.find_by_email_and_event_id(current_user.email, @event.id) or current_user == @event.user
     end
 
 end

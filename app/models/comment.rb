@@ -6,6 +6,15 @@ class Comment < ActiveRecord::Base
 
 
   def email_notification
-  	UpdateMailer.delay.comment(self)
+  		@invitations = event.invitations.where(:blocked => false)
+		@author_invitation = Invitation.find_by_email_and_event_id(user.email, event.id )
+
+		@invitations -= Array.wrap(@author_invitation)
+    	@invitations.each do |i|
+			UpdateMailer.delay.comment(self, i.email, i)
+		end
+		UpdateMailer.delay.comment(self, event.user.email) unless event.user == user
   end
 end
+
+
